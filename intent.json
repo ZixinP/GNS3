@@ -4,14 +4,15 @@
         "ASNumber": 65001,
         "IGP": "OSPF",
         "IPRange": "2000:2000:2000:2000::/112",
-        "LoopbackRange": "10:10:10:10::/112",
         "Routers": [
             {
                 "RouterID": 1,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0"
+                     "GigabitEthernet 3/0",
+                     "Loopback 0"
+                                                         
                     ],
                 "Neighbors": [
                     {"RouterID": 2, "Interface": "GigabitEthernet 1/0"}  
@@ -22,7 +23,9 @@
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0" 
+                     "GigabitEthernet 3/0",
+                     "Loopback 0"
+                     
                     ],
                 "Neighbors": [
                     {"RouterID": 1, "Interface": "GigabitEthernet 1/0"},
@@ -34,7 +37,8 @@
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0"
+                     "GigabitEthernet 3/0",
+                     "Loopback 0"                   
                     ],
                 "Neighbors": [
                     {"RouterID": 2, "Interface": "GigabitEthernet 2/0"},
@@ -47,14 +51,14 @@
         "ASNumber": 65002,
         "IGP": "RIP",
         "IPRange": "2000:2000:2000:2001::/112",
-        "LoopbackRange": "10:10:10:11::/112",
         "Routers": [
             {
                 "RouterID": 4,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0"
+                     "GigabitEthernet 3/0",
+                     "Loopback 0"
                     ],
                 "Neighbors": [
                     {"RouterID": 3, "Interface": "GigabitEthernet 1/0"},
@@ -66,7 +70,8 @@
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0"
+                     "GigabitEthernet 3/0",
+                     "Loopback 0"
                     ],
                 "Neighbors": [
                     {"RouterID": 4, "Interface": "GigabitEthernet 2/0"},
@@ -78,7 +83,8 @@
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0"
+                     "GigabitEthernet 3/0",
+                     "Loopback 0"
                     ],
                 "Neighbors": [
                     {"RouterID": 5, "Interface": "GigabitEthernet 1/0"}
