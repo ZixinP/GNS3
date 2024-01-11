@@ -1,7 +1,8 @@
 class router():
    def __init__(self,as_number, router_id):
          self.router_id = router_id
-         self.interfaces = []
+         self.interfaces_physiques = []
+         self.interface_loopback = []
          self.as_number = as_number
          self.neighbors = []
    
@@ -37,13 +38,18 @@ class AS():
                              
                              # si le lien existe déjà dans la liste
                              if link[0]==router.router_id :                   
-                                FLAG=False
+                                    if link[2]==neighbor[0]:
+                                          FLAG=False
+                                          if link[3]==None:   # si l'interface de voisin n'est pas declarée
+                                                link[3]=neighbor[1]
                              
-                             # si le lien existe déjà dans la liste mais il manque le nom de l'interface de voisin
-                             elif link[2]==router.router_id:
-                                FLAG=False
-                                if link[3]==None:
-                                    link[3]=neighbor[1]
+                             # si le lien existe déjà dans la liste mais dans l'autre sens
+                             if link[0]==neighbor[0] :
+                                    if link[2]==router.router_id:
+                                          FLAG=False
+                                          if link[3]==None:
+                                                link[3]=neighbor[1]
+                        
                         # si le lien n'existe pas dans la liste, on l'ajoute 
                         if FLAG:
                               liste_links.append([router.router_id,neighbor[1],neighbor[0],None])

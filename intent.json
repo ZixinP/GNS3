@@ -4,6 +4,7 @@
         "ASNumber": 65001,
         "IGP": "OSPF",
         "IPRange": "2000:2000:2000:2000::/112",
+        "loopbackRange": "2000:2000:2000:2000:2000::/128",
         "Routers": [
             {
                 "RouterID": 1,
