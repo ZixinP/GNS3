@@ -38,7 +38,7 @@ def generate_cisco_config_physique(network_intents, dict_data, dict_output_file)
                 
                 for interface in interfaces:
                     interface_name = f"R{interface}"
-                    interface_name = c.interface(igp_protocol)   # créer un objet interface
+                    interface_name = c.interface(interface_name,igp_protocol)   # créer un objet interface
                     
                     # ajouter l'interface aux listes des interfaces du router
                     if interface_name not in router_name.interfaces_:

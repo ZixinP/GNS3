@@ -11,7 +11,8 @@ class router():
 
 
 class interface():
-   def __init__(self, protocol):
+   def __init__(self, name,protocol):
+         self.name = name
          self.loopback=False
          self.ipv6_address = None
          self.loopback_address = None
@@ -25,7 +26,7 @@ class AS():
          self.as_number = as_number
          self.igp_protocol = igp_protocol
          self.router = []
-         self.links = []
+         self.links = []     # [router_id,router_interface,neighbor_id,neighbor_interface]
          self.iprange = ip_range
          self.ipmask = ip_mask
          
@@ -33,6 +34,7 @@ class AS():
             liste_links = []
             for router in self.router:
                   for neighbor in router.neighbors:
+                        
                         for link in liste_links:
                              FLAG=True
                              
@@ -53,7 +55,13 @@ class AS():
                         # si le lien n'existe pas dans la liste, on l'ajoute 
                         if FLAG:
                               liste_links.append([router.router_id,neighbor[1],neighbor[0],None])
-            
+                              
+                              # ajouter l'interface de voisin dans l'objet interface
+                              for interface in router.interfaces_physiques:
+                                    if interface.name == neighbor[1]:
+                                          interface.neighbor_id = neighbor[0]
+                                    
+                              
             self.links=liste_links
       
                  
