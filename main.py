@@ -17,3 +17,5 @@ def main(intent_file):
     bgp.etablir_ebgp(dict_data, dict_output_file)    # créer les objets et générer les consignes de configuration eBGP
     
     return dict_output_file
+
+main('intent.json')
