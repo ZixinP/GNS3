@@ -17,7 +17,7 @@ def ospf_mode_passive(output_file,interface, router_id, as_number):
     with open(output_file, 'a') as file:
         file.write(f"R{router_id}# configure terminal \n")
         file.write(f"R{router_id}# interface {interface} \n")
-        file.write(f"R{router_id}# ipv6 router ospf passive as_number \n")
+        file.write(f"R{router_id}# ipv6 router ospf passive {as_number} \n")
         file.write(f"R{router_id}# passive-interface {interface}\n")
         file.write(f"R{router_id}# end \n")
         
