@@ -1,0 +1,35 @@
+R4# configure terminal 
+R4# ipv6 unicast routing 
+R4# ipv6 router rip 65002
+R4# redistribute connected 
+R4# interface GigabitEthernet 3/0 
+R4# ipv6 rip 65002 enable
+R4# end 
+R4# configure terminal 
+R4# ipv6 unicast routing 
+R4# interface GigabitEthernet 1/0 
+R4# ipv6 address 2000:2000:2000:2002::1/114 
+R4# no shutdown 
+R4# end 
+R4# configure terminal 
+R4# ipv6 unicast routing 
+R4# interface GigabitEthernet 2/0 
+R4# ipv6 address 2000:2000:2000:2003::1/114 
+R4# no shutdown 
+R4# end 
+R4# configure terminal 
+R4# ipv6 unicast routing 
+R4# interface Loopback 0 
+R4# ipv6 address 2000:2000:2000:2000:2001::1/128 
+R4# no shutdown 
+R4# end 
+R4# configure terminal
+R4# interface Loopback 0
+R4# router bgp 65002
+R4# neighbor 2000:2000:2000:2000:2001::2 remote-as 65002
+R4# end 
+R4# configure terminal
+R4# interface Loopback 0
+R4# router bgp 65002
+R4# neighbor 2000:2000:2000:2000:2001::3 remote-as 65002
+R4# end 
