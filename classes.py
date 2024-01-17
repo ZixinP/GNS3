@@ -11,7 +11,8 @@ class router():
 
 
 class interface():
-   def __init__(self, name,protocol):
+   def __init__(self, router_id,name,protocol):
+         self.router_id = router_id
          self.name = name
          self.loopback=False
          self.ipv6_address = None
@@ -34,10 +35,10 @@ class AS():
             liste_links = []
             for router in self.router:
                   for neighbor in router.neighbors:
+                        FLAG=True
                         
                         for link in liste_links:
-                             FLAG=True
-                             
+                          
                              # si le lien existe déjà dans la liste
                              if link[0]==router.router_id :                   
                                     if link[2]==neighbor[0]:

@@ -23,27 +23,29 @@ def subnet_calculate(ip_range,ip_mask,subnet_amount):
         prefix_network_lastbyte+=1
        
         # choisir le préfixe du sous-réseau sauf le dernier byte
-        prefix_network=prefix_network.split(":")[:-1]  
+        prefix_sauf_lastbyte=prefix_network.split(":")[:-1]  
         
         # ajouter le dernier byte
-        prefix_network.append(str(prefix_network_lastbyte))
+        prefix_sauf_lastbyte.append(str(prefix_network_lastbyte))
        
         # construire le nouveau préfixe
-        prefix_network=":".join(prefix_network)
-        prefix_network=prefix_network+"/" + str(prefix_nb)
+        new_prefix_network=":".join(prefix_sauf_lastbyte)
+        new_prefix_network=new_prefix_network+"::/"+str(prefix_nb)
         
         #le stocker dans un dictionnaire
-        dict_subnet[i]=prefix_network
+        dict_subnet[i]=new_prefix_network
    
     return dict_subnet
                  
 # configurer l'adresse IP de l'interface
 def ipv6_config(output_file,interface, router_id, as_number,interface_ip):    
-    output_file.write(f"R{router_id}# configure terminal \n")        
-    output_file.write(f"R{router_id}# ipv6 unicast routing \n")
-    output_file.write(f"R{router_id}# interface {interface} \n")
-    output_file.write(f"R{router_id}# ipv6 address {interface_ip} \n")
-    output_file.write(f"R{router_id}# no shutdown \n")
-    output_file.write(f"R{router_id}# end \n")                    
+    with open(output_file, 'a') as output_file:
+        output_file.write(f"R{router_id}# configure terminal \n")        
+        output_file.write(f"R{router_id}# ipv6 unicast routing \n")
+        output_file.write(f"R{router_id}# interface {interface} \n")
+        output_file.write(f"R{router_id}# ipv6 address {interface_ip} \n")
+        output_file.write(f"R{router_id}# no shutdown \n")
+        output_file.write(f"R{router_id}# end \n")
+                
                     
             

@@ -1,12 +1,11 @@
 
-import json
-
 import protocols as p
 import classes as c
 import fonctions as f
 
 dict_data = {}  # dictionnaire pour stocker tous les objets créés
 dict_output_file = {}  # dictionnaire pour stocker les fichiers de consignes de configuration des routeurs différents
+
 
 # Description: creation des consigne de configuration des adresses IPv6 sur les interfaces physiques
 def generate_cisco_config_physique(network_intents, dict_data, dict_output_file):
@@ -23,8 +22,9 @@ def generate_cisco_config_physique(network_intents, dict_data, dict_output_file)
             
             
             as_name=f"AS{as_number}"
-            as_name = c.AS(as_number, igp_protocol, ip_range)    # créer un objet AS
-              
+            as_name = c.AS(as_number, igp_protocol, ip_range,ip_range_mask)    # créer un objet AS
+
+            
             for router in intent["Routers"]:
                 router_id = router["RouterID"]
                 neighbors = router["Neighbors"]
@@ -34,28 +34,28 @@ def generate_cisco_config_physique(network_intents, dict_data, dict_output_file)
                 router_name = c.router(as_number, router_id)   # créer un objet router
                 as_name.router.append(router_name)   # ajouter le router à l'AS
                 
-                output_file_name = f"R{router_id}.txt"
+                output_file_name = f"R{router_id}.txt" 
                 
                 for interface in interfaces:
-                    interface_name = f"R{interface}"
-                    interface_name = c.interface(interface_name,igp_protocol)   # créer un objet interface
+                    interface_obj = f"R{router_id}{interface}"
+                    interface_obj = c.interface(router_id,interface,igp_protocol)   # créer un objet interface
                     
                     # ajouter l'interface aux listes des interfaces du router
-                    if interface_name not in router_name.interfaces_:
+                    if interface_obj.name not in router_name.interfaces_physiques and interface_obj.name not in router_name.interface_loopback:
                         if interface == "Loopback 0":
-                            router_name.interface_loopback.append(interface_name)
-                            interface_name.loopback=True                    #identifiant pour l'interface loopback
+                            router_name.interface_loopback.append(interface_obj)   # ajouter l'interface loopback à la liste des interfaces loopback du router
+                            interface_obj.loopback=True                    #identifiant pour l'interface loopback
                         else:
-                            router_name.interfaces_physiques.append(interface_name)                  
+                            router_name.interfaces_physiques.append(interface_obj)   # ajouter l'interface physique à la liste des interfaces physiques du router)                  
                             
                             # configurer le protocole IGP sur l'interface physique
-                            interface_name.protocol=igp_protocol
+                            interface_obj.protocol=igp_protocol
                             if igp_protocol=="OSPF":
                                 with open(output_file_name, 'w') as file:      # ouvrir le fichier de sortie en mode écriture 
-                                    p.ospf_config(output_file_name,interface_name, router_id, as_number)   # configurer OSPF sur le router
+                                    p.ospf_config(output_file_name,interface_obj.name, router_id, as_number)   # configurer OSPF sur le router
                             elif igp_protocol=="RIP":
                                 with open(output_file_name, 'w') as file:      # ouvrir le fichier de sortie en mode écriture                                
-                                    p.rip_config(output_file_name,interface_name, router_id, as_number)   # configurer RIP sur le router
+                                    p.rip_config(output_file_name,interface_obj.name, router_id, as_number)   # configurer RIP sur le router
                             else:
                                 print("Error: IGP protocol not supported")
                     
@@ -88,25 +88,38 @@ def generate_cisco_config_physique(network_intents, dict_data, dict_output_file)
                 comme link[0] est toujours le routeur dans ce AS, 
                 on peut directement configurer l'adresse IP de l'interface de routeur
                 '''
-                self_interface.ipv6_address=link_ip.split("/")[0]+"1"+"/"+link_ip.split("/")[1]   
-                print(self_interface.ipv6_address)
-                for output_file_key in dict_output_file.keys():
-                    if router_id == output_file_key:
-                        with open(dict_output_file[output_file_key], 'w') as file:
-                            f.ipv6_config(dict_output_file[output_file_key],self_interface, router_id, as_number,self_interface.ipv6_address)   
                 
-                # si le voisin est un routeur de l'AS
-                if neighbor_interface!=None:
-                    neighbor_interface.ipv6_address=link_ip.split("/")[0]+"2"+"/"+link_ip.split("/")[1]   # configurer l'adresse IP de l'interface de voisin  
-                    print(neighbor_interface.ipv6_address)
-                    for output_file_key in dict_output_file.keys():
-                        if neighbor_id == output_file_key:
-                            with open(dict_output_file[output_file_key], 'w') as file:    
-                                f.ipv6_config(dict_output_file[output_file_key],neighbor_interface, neighbor_id, as_number,neighbor_interface.ipv6_address)   # configurer l'adresse IP de l'interface de voisin       
+                for interface in as_name.router[0].interfaces_physiques:
+                    if interface.name==self_interface:
+                        
+                        interface.ipv6_address=link_ip.split("/")[0]+"1"+"/"+link_ip.split("/")[1]     # configurer l'adresse IP de l'interface de routeur
+                        print(interface.ipv6_address)
+                         
+                         # si le voisin est un routeur d'un autre AS  
+                        if neighbor_id == None:               
+                            for output_file_key in dict_output_file.keys():
+                                if router_id == output_file_key:
+                                    f.ipv6_config(dict_output_file[output_file_key],self_interface, router_id, as_number,interface.ipv6_address)   
+                                    if interface.protocol=="OSPF":
+                                        p.ospf_mode_passive(dict_output_file[output_file_key],self_interface, router_id, as_number)   # configurer OSPF en mode passif sur l'interface physique
+                        
+                         # si le voisin est un routeur dans ce AS
+                        else:
+                            for output_file_key in dict_output_file.keys():
+                                if router_id == output_file_key:
+                                    f.ipv6_config(dict_output_file[output_file_key],self_interface, router_id, as_number,interface.ipv6_address)   
                 
+                            for interface in as_name.router[0].interfaces_physiques: 
+                                if interface.name==neighbor_interface:
+                                    interface.ipv6_address=link_ip.split("/")[0]+"2"+"/"+link_ip.split("/")[1]    # configurer l'adresse IP de l'interface de voisin
+                                    print(interface.ipv6_address)
+                                    for output_file_key in dict_output_file.keys():
+                                        if neighbor_id == output_file_key:  
+                                            f.ipv6_config(dict_output_file[output_file_key],neighbor_interface, neighbor_id, as_number,interface.ipv6_address)          
+                               
                 i+=1     
         
-        dict_data[as_name.as_number]=as_name   # ajouter l'AS au dictionnaire dict_data 
+            dict_data[as_number]=as_name   # ajouter l'AS au dictionnaire dict_data 
         
           
                 
@@ -116,7 +129,7 @@ def generate_cisco_config_loopback(network_intent, dict_data, dict_output_file):
     
     for intent in network_intent:
         as_number = intent["ASNumber"]
-        loopback_range = intent["LoopbackRange"]
+        loopback_range = intent["loopbackRange"]
             
         lo_range_reseau = loopback_range.split("/")[0]
         print(lo_range_reseau)
@@ -132,8 +145,7 @@ def generate_cisco_config_loopback(network_intent, dict_data, dict_output_file):
                 i+=1
                 for output_file_key in dict_output_file.keys():
                     if router_id == output_file_key:
-                        with open(dict_output_file[output_file_key], 'w') as file:
-                            f.ipv6_config(dict_output_file[output_file_key],interface, router_id, as_number,interface.loopback_address)   # configurer l'adresse loopback sur les interfaces loopback 
+                        f.ipv6_config(dict_output_file[output_file_key],interface, router_id, as_number,interface.loopback_address)   # configurer l'adresse loopback sur les interfaces loopback 
                 
             
                            

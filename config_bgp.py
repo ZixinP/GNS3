@@ -17,7 +17,7 @@ def etablir_ibgp(dict_data, dict_output_file):
                                    
                                    # ajouter les consignes sur la connexion ibgp dans le fichier
                                    with open(dict_output_file[output_file_key], 'a') as file:
-                                       p.ibgp_config(dict_output_file[output_file_key],dict_data[AS].as_number,self_router.router.id,self_router.interface_loopback[0],other_router_loopback)
+                                       p.ibgp_config(dict_output_file[output_file_key],dict_data[AS].as_number,self_router.router_id,self_router.interface_loopback[0],other_router_loopback)
     
     '''
     Essai d'utiliser le dict pour stocker les liens ibgp
@@ -38,8 +38,8 @@ def etablir_ebgp(dict_data, dict_output_file):
                     if router.router_id==router_id:
                         for interface in router.interfaces_physiques:
                             if interface.name==link[1]:
-                                add_ipv6=interface.ipv6_address.split("/")[0]    # recuperer l'adresse ipv6 de l'interface
-                              
+                                add_ipv6=interface.ipv6_address    # recuperer l'adresse ipv6 de l'interface
+                                add_ipv6=add_ipv6.split("/")[0]
                 for ebgp_link in ebgp_links:
                     FLAG=True        # pour verifier si le lien existe deja dans la liste
                    
@@ -55,7 +55,7 @@ def etablir_ebgp(dict_data, dict_output_file):
                             if ebgp_link[4]==None:
                                 ebgp_link[4]=as_number
                                 ebgp_link[6]= link[1]
-                                ebgp_link[7]=add_ipv6  
+                                ebgp_link[7]=add_ipv6
                 
                 # si le lien n'existe pas dans la liste, on l'ajoute
                 if FLAG:
@@ -73,4 +73,4 @@ def etablir_ebgp(dict_data, dict_output_file):
         for output_file_key in dict_output_file.keys():
             if router_id == output_file_key:
                 with open(dict_output_file[output_file_key], 'a') as file:
-                    p.ebgp_config(dict_output_file[output_file_key],as_number, router_id,router_interface,neighbor_as,neighbor_id,neighbor_interface,neighbor_inter_add)
+                    p.ebgp_config(dict_output_file[output_file_key],as_number, router_id,neighbor_as,neighbor_inter_add)
