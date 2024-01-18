@@ -26,6 +26,8 @@ R4# end
 R4# configure terminal
 R4# interface Loopback 0
 R4# router bgp 65002
+R4# no bgp default ipv4-unicast
+R4# bgp router-id <X.X.X.X>
 R4# neighbor 2000:2000:2000:2000:2001::2 remote-as 65002
 R4# end 
 R4# configure terminal
