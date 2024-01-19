@@ -5,6 +5,7 @@
         "IGP": "OSPF",
         "IPRange": "2000:2000:2000:2000::/112",
         "loopbackRange": "2000:2000:2000:2000:2000::/128",
+        "BGP Policies": {"AS1": "peer"},  
         "Routers": [
             {
                 "RouterID": 1,
@@ -52,6 +53,7 @@
         "ASNumber": 65002,
         "IGP": "RIP",
         "IPRange": "2000:2000:2000:2001::/112",
+        "BGP Policies": {"AS2": "peer"},  
         "Routers": [
             {
                 "RouterID": 4,
