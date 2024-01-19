@@ -14,6 +14,7 @@
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "Loopback 0"
+                     "port": 5000,
                                                          
                     ],
                 "Neighbors": [
@@ -27,6 +28,7 @@
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "Loopback 0"
+                     "port": 5001,
                      
                     ],
                 "Neighbors": [
@@ -40,7 +42,8 @@
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
-                     "Loopback 0"                   
+                     "Loopback 0"  
+                     "port": 5002,
                     ],
                 "Neighbors": [
                     {"RouterID": 2, "Interface": "GigabitEthernet 2/0"},
@@ -62,6 +65,7 @@
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "Loopback 0"
+                     "port": 5003,
                     ],
                 "Neighbors": [
                     {"RouterID": 3, "Interface": "GigabitEthernet 1/0"},
@@ -75,6 +79,7 @@
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "Loopback 0"
+                     "port": 5004,
                     ],
                 "Neighbors": [
                     {"RouterID": 4, "Interface": "GigabitEthernet 2/0"},
@@ -88,6 +93,7 @@
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "Loopback 0"
+                     "port": 5005,
                     ],
                 "Neighbors": [
                     {"RouterID": 5, "Interface": "GigabitEthernet 1/0"}
