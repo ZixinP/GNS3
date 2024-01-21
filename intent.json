@@ -9,7 +9,7 @@
         "Routers": [
             {
                 "RouterID": 1,
-                "BorderRouter":false
+                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -24,7 +24,7 @@
             },
             {
                 "RouterID": 2,
-                "BorderRouter":false
+                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -43,7 +43,7 @@
             },
             {
                 "RouterID": 3,
-                "BorderRouter":true
+                "BorderRouter":true,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -59,7 +59,7 @@
             }
              {
                 "RouterID": 7,
-                "BorderRouter":false
+                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -73,7 +73,7 @@
             }
              {
                 "RouterID": 8,
-                "BorderRouter":false
+                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -89,7 +89,7 @@
             }
              {
                 "RouterID": 9,
-                "BorderRouter":false
+                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -107,7 +107,7 @@
             }
              {
                 "RouterID": 10,
-                "BorderRouter":true
+                "BorderRouter":true,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -131,7 +131,7 @@
         "Routers": [
             {
                 "RouterID": 4,
-                "BorderRouter":true
+                "BorderRouter":true,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -147,7 +147,7 @@
             },
             {
                 "RouterID": 5,
-                "BorderRouter":false
+                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -164,7 +164,7 @@
             },
             {
                 "RouterID": 6,
-                "BorderRouter":false
+                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -180,7 +180,7 @@
             }
              {
                 "RouterID": 11,
-                "BorderRouter":true
+                "BorderRouter":true,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -196,7 +196,7 @@
             }
              {
                 "RouterID": 12,
-                "BorderRouter":false
+                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -214,7 +214,7 @@
             }
              {
                 "RouterID": 13,
-                "BorderRouter":false
+                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
@@ -230,7 +230,7 @@
             }
              {
                 "RouterID": 14,
-                "BorderRouter":false
+                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
