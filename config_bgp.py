@@ -86,7 +86,7 @@ def etablir_ebgp(dict_data, dict_output_file):
                             interface.neighbor_id=neighbor_id
                             interface.neighbor_address=neighbor_inter_add
                             break
-                    
+                    # annoncer les prefixes de routes interieures
                     p.ebgp_network(dict_output_file[output_file_key],as_number, router_id,dict_data[AS]) 
     print(ebgp_links)
     
