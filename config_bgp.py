@@ -18,7 +18,7 @@ def etablir_ibgp(dict_data, dict_output_file):
                                    # ajouter les consignes sur la connexion ibgp dans le fichier
                                    with open(dict_output_file[output_file_key], 'a') as file:
                                        p.ibgp_config(dict_output_file[output_file_key],dict_data[AS].as_number,self_router.router_id,self_router.interface_loopback[0].name,other_router_loopback)
-    
+                                       
     '''
     Essai d'utiliser le dict pour stocker les liens ibgp
     au lieu de iterer sur les routeurs et les interfaces
@@ -86,5 +86,7 @@ def etablir_ebgp(dict_data, dict_output_file):
                             interface.neighbor_id=neighbor_id
                             interface.neighbor_address=neighbor_inter_add
                             break
-                     
+                    
+                    p.ebgp_network(dict_output_file[output_file_key],as_number, router_id,dict_data[AS]) 
     print(ebgp_links)
+    
