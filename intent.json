@@ -2,7 +2,7 @@
     "networkIntents": [
       {
         "ASNumber": 65001,
-        "IGP": "OSPF",
+        "IGP": "RIP",
         "IPRange": "2000:2000:2000:2000::/112",
         "loopbackRange": "2000:2000:2000:2000:2000::/128",
         "as_provider": [],
@@ -134,7 +134,7 @@
       },
       {
         "ASNumber": 65002,
-        "IGP": "RIP",
+        "IGP": "OSPF",
         "IPRange": "2000:2000:2000:2001::/112",
         "as_provider": [65001],
         "as_customer": [],
