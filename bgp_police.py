@@ -24,7 +24,6 @@ import classes as c
 
 def Community_local_pref(dict_output_file, dict_data):
     for AS in dict_data.keys():
-        set_peer_group(dict_data[AS])
         for router in dict_data[AS].routers:
             if router.ASBR:
                 for interface in router.interfaces_physiques:
@@ -98,18 +97,6 @@ def Community_local_pref(dict_output_file, dict_data):
     return
 
 
-# creer un peer groupe pour envoyer les community a tous les routeur de meme AS 
-def set_peer_group(AS):
-    '''
-    router bgp {AS.as_number}
-    
-    neighbor ibgp_peer_group peer-group
-    neighbor ibgp_peer_group send-community
-    '''
-    for router in AS.routers:
-        '''
-        neighbor {router.loopback_address} peer-group ibgp_peer_group
-        '''
 
 
 
