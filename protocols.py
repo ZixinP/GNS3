@@ -48,6 +48,9 @@ def ibgp_config(output_file,as_number,router_id,interface, neighbor_router_ip):
         file.write(f"R{router_id}# interface {interface}\n")
         file.write(f"R{router_id}# router bgp {as_number}\n")
         file.write(f"R{router_id}# neighbor {neighbor_router_ip} remote-as {as_number}\n")
+        file.write(f"R{router_id}# address-family ipv6 unicast\n")
+        file.write(f"R{router_id}# neighbor {neighbor_router_ip} activate\n")
+        file.write(f"R{router_id}# neighbor {neighbor_router_ip} send-community\n")  # pour propager community vers tous les routeurs de meme AS 
         file.write(f"R{router_id}# end \n")
     
 
