@@ -5,7 +5,9 @@
         "IGP": "OSPF",
         "IPRange": "2000:2000:2000:2000::/112",
         "loopbackRange": "2000:2000:2000:2000:2000::/128",
-        "BGP Policies": {"AS1": "peer"},  
+        "as_provider": [],
+        "as_customer": [65002],
+        "as_peer":[], 
         "Routers": [
             {
                 "RouterID": 1,
@@ -16,7 +18,7 @@
                      "GigabitEthernet 3/0",
                      "Loopback 0"
                      ],
-                     "port": 5000,
+                "port": 5000,
                                                          
                    
                 "Neighbors": [
@@ -33,7 +35,7 @@
                      "GigabitEthernet 4/0",
                      "Loopback 0"
                      ],
-                     "port": 5001,
+                "port": 5001,
                      
                     
                 "Neighbors": [
@@ -52,7 +54,7 @@
                      "GigabitEthernet 3/0",
                      "Loopback 0"
                      ],
-                     "port": 5002,
+                "port": 5002,
                     
                 "Neighbors": [
                     {"RouterID": 2, "Interface": "GigabitEthernet 2/0"},
@@ -68,7 +70,7 @@
                      "GigabitEthernet 2/0",
                      "Loopback 0" 
                      ],
-                     "port": 5006,
+                "port": 5006,
                     
                 "Neighbors": [
                     {"RouterID": 1, "Interface": "GigabitEthernet 2/0"},
@@ -84,7 +86,7 @@
                      "GigabitEthernet 3/0",
                      "Loopback 0"  
                      ],
-                     "port": 5007,
+                "port": 5007,
                     
                 "Neighbors": [
                     {"RouterID": 1, "Interface": "GigabitEthernet 3/0"},
@@ -102,7 +104,7 @@
                      "GigabitEthernet 4/0",
                      "Loopback 0" 
                      ],
-                     "port": 5008,
+                "port": 5008,
                     
                 "Neighbors": [
                     {"RouterID": 2, "Interface": "GigabitEthernet 3/0"},
@@ -120,7 +122,7 @@
                      "GigabitEthernet 3/0",
                      "Loopback 0"
                      ],
-                     "port": 5009,
+                "port": 5009,
                     
                 "Neighbors": [
                     {"RouterID": 2, "Interface": "GigabitEthernet 3/0"},
@@ -134,7 +136,9 @@
         "ASNumber": 65002,
         "IGP": "RIP",
         "IPRange": "2000:2000:2000:2001::/112",
-        "BGP Policies": {"AS2": "peer"},  
+        "as_provider": [65001],
+        "as_customer": [],
+        "as_peer": [],
         "Routers": [
             {
                 "RouterID": 4,
@@ -145,7 +149,7 @@
                      "GigabitEthernet 3/0",
                      "Loopback 0"
                      ],
-                     "port": 5003,
+                "port": 5003,
                     
                 "Neighbors": [
                     {"RouterID": 3, "Interface": "GigabitEthernet 1/0"},
@@ -162,7 +166,7 @@
                      "GigabitEthernet 3/0",
                      "Loopback 0"
                      ],
-                     "port": 5004,
+                "port": 5004,
                     
                 "Neighbors": [
                     {"RouterID": 4, "Interface": "GigabitEthernet 2/0"},
@@ -180,7 +184,7 @@
                      "GigabitEthernet 3/0",
                      "Loopback 0"
                     ], 
-                     "port": 5005,
+                "port": 5005,
                     
                 "Neighbors": [
                     {"RouterID": 5, "Interface": "GigabitEthernet 1/0"},
@@ -197,7 +201,7 @@
                      "GigabitEthernet 3/0",
                      "Loopback 0"  
                      ],
-                     "port": 5010,
+                "port": 5010,
                     
                 "Neighbors": [
                     {"RouterID": 10, "Interface": "GigabitEthernet 2/0"},
@@ -215,7 +219,7 @@
                      "GigabitEthernet 4/0",
                      "Loopback 0"  
                      ],
-                     "port": 5011,
+                "port": 5011,
                     
                 "Neighbors": [
                     {"RouterID": 11, "Interface": "GigabitEthernet 1/0"},
@@ -233,7 +237,7 @@
                      "GigabitEthernet 3/0",
                      "Loopback 0" 
                      ],
-                     "port": 5012,
+                "port": 5012,
                     
                 "Neighbors": [
                     {"RouterID": 6, "Interface": "GigabitEthernet 3/0"},
@@ -249,7 +253,7 @@
                      "GigabitEthernet 2/0",
                      "Loopback 0" 
                      ],
-                     "port": 5013,
+                "port": 5013,
                     
                 "Neighbors": [
                     {"RouterID": 6, "Interface": "GigabitEthernet 2/0"},
