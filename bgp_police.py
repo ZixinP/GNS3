@@ -11,27 +11,7 @@ community: xxx:yyy (xxx = AS number, yyy = community number) contenu dans le paq
     match ip address PREFIX_LIST
     set community 200:2
 
-#对于每一个asbr,network as.subnets里面的所有网段
 
-# 对于每个asbr,通过遍历links_externe查看它的邻居所在的as,遍别是peer,provider,customer哪一个,并加在neighbors的最后一项,然后根据这个信息到对应端口来配置community
-
-#! 进入BGP配置模式
-router bgp <Your-AS-Number>
-
-! 创建一个Route Map,用于匹配Community并更改local preference,customer的local preference最高,peer的次之,provider的最低
-route-map SET_LOCAL_PREF permit 10
- match community 100:1
- set local-preference 200
-
-! 应用Route Map到BGP邻居
-neighbor <Neighbor-IP> route-map SET_LOCAL_PREF in
-
-# 给customer路由器的in是允许全部通过,out是只允许自身的路由通过,peer的不行
-# 给peer路由器的in是允许全部通过,out是只允许自身的路由通过,customer的不行
-# 给provider路由器的in是允许全部通过,out是只允许自身的路由通过,customer的不行  
-？？？不确定是不是这样
-
-# 所有的community都是在邻居路由器的in方向配置的？ 
 '''
 
 
