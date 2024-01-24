@@ -20,6 +20,15 @@ def ospf_mode_passive(output_file,interface, router_id, as_number):
         file.write(f"R{router_id}# ipv6 router ospf passive {as_number} \n")
         file.write(f"R{router_id}# passive-interface {interface}\n")
         file.write(f"R{router_id}# end \n")
+
+def ospf_cost_commands(output_file,interface, router_id, as_number,metric_value):
+     with open(output_file, 'a') as file:
+        file.write(f"R{router_id}# configure terminal \n")
+        file.write(f"R{router_id}# interface {interface} \n")
+        file.write(f"R{router_id}# ipv6 ospf 1 area {as_number}\n")
+        file.write(f"R{router_id}# cost {metric_value}\n")
+        file.write(f"R{router_id}# end \n")
+         
         
         
 def rip_config(output_file,interface, router_id, as_number):
