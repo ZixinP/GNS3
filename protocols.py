@@ -65,3 +65,11 @@ def ebgp_config(outputfile,as_number, router_id,neighbor_as_number,neighbor_rout
         file.write(f"R{router_id}# neighbor {neighbor_router_ip} activate \n")
         file.write(f"R{router_id}# end \n")   
         
+def ebgp_network(outputfile,as_number, router_id,AS):
+    with open(outputfile, 'a') as file:
+        file.write(f"R{router_id}# configure terminal \n")
+        file.write(f"R{router_id}# router bgp {as_number} \n")
+        file.write(f"R{router_id}# address-family ipv6 unicast \n")
+        for subnet in AS.subnets:
+            file.write(f"R{router_id}# network {subnet} \n")
+        file.write(f"R{router_id}# end \n")
