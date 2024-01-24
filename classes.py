@@ -1,11 +1,12 @@
 class router():
    def __init__(self,as_number, router_id):
+         self.as_number = as_number
          self.router_id = router_id
          self.interfaces_physiques = []
          self.interface_loopback = []
-         self.as_number = as_number
          self.neighbors = []
-   
+         self.ASBR=False
+         
    def add_neighbor(self, neighborrouter_id, neighbor_interface):     # ajouter un voisin dans la liste 
          self.neighbors.append([neighborrouter_id, neighbor_interface])
 
@@ -17,8 +18,9 @@ class interface():
          self.loopback=False
          self.ipv6_address = None
          self.loopback_address = None
+         self.neighbor_as = None
          self.neighbor_id = None
-         self.neighbor_interface = None
+         self.neighbor_address = None
          self.protocol = protocol
          
          
@@ -30,7 +32,11 @@ class AS():
          self.links = []     # [router_id,router_interface,neighbor_id,neighbor_interface]
          self.iprange = ip_range
          self.ipmask = ip_mask
-         
+         self.subnets={}
+         self.provider={}
+         self.customers={}
+         self.peers={}
+      
       def linkscollect(self):     # collecter les liens entre les routeurs de l'AS
             liste_links = []
             for router in self.router:
@@ -43,19 +49,19 @@ class AS():
                              if link[0]==router.router_id :                   
                                     if link[2]==neighbor[0]:
                                           FLAG=False
-                                          if link[3]==None:   # si l'interface de voisin n'est pas declarée
-                                                link[3]=neighbor[1]
+                                          
                              
                              # si le lien existe déjà dans la liste mais dans l'autre sens
                              if link[0]==neighbor[0] :
                                     if link[2]==router.router_id:
                                           FLAG=False
-                                          if link[3]==None:
+                                          if link[3]==None:        # si l'interface de voisin n'est pas encore configurée
                                                 link[3]=neighbor[1]
                         
                         # si le lien n'existe pas dans la liste, on l'ajoute 
                         if FLAG:
                               liste_links.append([router.router_id,neighbor[1],neighbor[0],None])
+                              router.ASBR=True
                               
                               # ajouter l'interface de voisin dans l'objet interface
                               for interface in router.interfaces_physiques:

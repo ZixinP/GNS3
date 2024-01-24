@@ -14,6 +14,9 @@ def generate_cisco_config_physique(network_intents, dict_data, dict_output_file)
             as_number = intent["ASNumber"]
             igp_protocol = intent["IGP"]
             ip_range = intent["IPRange"]  
+            provider = intent["Provider"]
+            customers = intent["Customers"]
+            peers = intent["Peers"]
             
             ip_range_reseau = ip_range.split("/")[0]
             print(ip_range_reseau)
@@ -22,8 +25,14 @@ def generate_cisco_config_physique(network_intents, dict_data, dict_output_file)
             
             
             as_name=f"AS{as_number}"
-            as_name = c.AS(as_number, igp_protocol, ip_range,ip_range_mask)    # créer un objet AS
-
+            as_name = c.AS(as_number, igp_protocol, ip_range,ip_range_mask)
+            
+            for provider_as in provider:
+                as_name.provider[provider_as]=f"{as_number}:{provider_as}"
+            for customer_as in customers:
+                as_name.customers[customer_as]=f"{as_number}:{customer_as}"
+            for peer_as in peers:
+                as_name.peers[peer_as]=f"{as_number}:{peer_as}"
             
             for router in intent["Routers"]:
                 router_id = router["RouterID"]
@@ -34,7 +43,7 @@ def generate_cisco_config_physique(network_intents, dict_data, dict_output_file)
                 router_name = c.router(as_number, router_id)   # créer un objet router
                 as_name.router.append(router_name)   # ajouter le router à l'AS
                 
-                output_file_name = f"R{router_id}.txt" 
+                output_file_name = f"R{router_id}.cfg"     # creer le fichier de sortie
                 
                 for interface in interfaces:
                     interface_obj = f"R{router_id}{interface}"
@@ -74,6 +83,7 @@ def generate_cisco_config_physique(network_intents, dict_data, dict_output_file)
             print(as_name.links)
             dict_subnet=f.subnet_calculate(ip_range_reseau,ip_range_mask,len(as_name.links))   
             print(dict_subnet)
+            as_name.subnets=dict_subnet   # ajouter les sous-réseaux au dictionnaire dict_subnet
             
             i=0   # key du dictionnaire dict_subnet
             for link in as_name.links:
@@ -145,7 +155,7 @@ def generate_cisco_config_loopback(network_intent, dict_data, dict_output_file):
                 i+=1
                 for output_file_key in dict_output_file.keys():
                     if router_id == output_file_key:
-                        f.ipv6_config(dict_output_file[output_file_key],interface, router_id, as_number,interface.loopback_address)   # configurer l'adresse loopback sur les interfaces loopback 
+                        f.ipv6_config(dict_output_file[output_file_key],interface.name, router_id, as_number,interface.loopback_address)   # configurer l'adresse loopback sur les interfaces loopback 
                 
             
                            
