@@ -65,14 +65,31 @@ def Community_local_pref(dict_output_file, dict_data):
                                         neighbor interface.neighbor_address route-map SET_LOCAL_PREF_peer in                                                           
                                         '''
                                         
-                                        # filtrer les routes pour que le voisin reçoit seulement les routes de customer
+                                        # filtrer les routes pour que le voisin reçoit seulement les routes de customer et les routes de ce AS
                                         for customer in dict_data[AS].customers.keys():
                                             '''
                                             route-map Advertize_customer permit 30
                                              match community {dict_data[AS].customer[customer]}
                                             neighbor interface.neighbor_address route-map Advertize_customer out
                                             '''
-                                    
+                                        for peer in dict_data[AS].peers.keys():
+                                            '''
+                                            route-map Advertize_peer deny 40
+                                             match community {dict_data[AS].peer[peer]}
+                                            neighbor interface.neighbor_address route-map Advertize_peer out
+                                            '''
+                                        for provider in dict_data[AS].providers.keys():
+                                            '''
+                                            route-map Advertize_provider deny 50
+                                             match community {dict_data[AS].provider[provider]}
+                                            neighbor interface.neighbor_address route-map Advertize_provider out
+                                            '''
+                                        '''
+                                        route-map Advertize_all permit 60
+                                        neighbor interface.neighbor_address route-map Advertize_all out
+                                        '''
+                                        
+                                        
                                     elif interface.neighbor_as in dict_data[AS].providers.keys():                                      
                                         # marquer les routes de provider avec community et changer leur local preference
                                         '''
@@ -87,13 +104,29 @@ def Community_local_pref(dict_output_file, dict_data):
                                         neighbor interface.neighbor_address route-map SET_LOCAL_PREF_provider in
                                     
                                         '''
-                                        # filtrer les routes pour que le voisin reçoit seulement les routes de customer
+                                        # filtrer les routes pour que le voisin reçoit seulement les routes de customer et les routes de ce AS
                                         for customer in dict_data[AS].customers.keys():
                                             '''
                                             route-map Advertize_customer permit 30
                                              match community {dict_data[AS].customer[customer]}
                                             neighbor interface.neighbor_address route-map Advertize_customer out
                                             '''
+                                        for peer in dict_data[AS].peers.keys():
+                                            '''
+                                            route-map Advertize_peer deny 40
+                                             match community {dict_data[AS].peer[peer]}
+                                            neighbor interface.neighbor_address route-map Advertize_peer out
+                                            '''
+                                        for provider in dict_data[AS].providers.keys():
+                                            '''
+                                            route-map Advertize_provider deny 50
+                                             match community {dict_data[AS].provider[provider]}
+                                            neighbor interface.neighbor_address route-map Advertize_provider out
+                                            '''
+                                        '''
+                                        route-map Advertize_all permit 60
+                                        neighbor interface.neighbor_address route-map Advertize_all out
+                                        '''
     return
 
 
