@@ -1,263 +1,104 @@
 {
     "networkIntents": [
       {
-        "ASNumber": 65001,
-        "IGP": "RIP",
-        "IPRange": "2000:2000:2000:2000::/112",
+        "ASNumber": 11,
+        "IGP": "OSPF",
+        "IPRange": "2000:2000:2000:::/64",
         "loopbackRange": "2000:2000:2000:2000:2000::/128",
-        "as_provider": [],
+        "as_provider": 0,
         "as_customer": [65002],
-        "as_peer":[], 
+        "as_peer":[65003],
         "Routers": [
             {
                 "RouterID": 1,
-                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "Loopback 0"
-                     ],
-                "port": 5000,
                                                          
-                   
+                    ],
+                "port": 5000,
                 "Neighbors": [
                     {"RouterID": 2, "Interface": "GigabitEthernet 1/0"}  
                 ]
             },
             {
                 "RouterID": 2,
-                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
-                     "GigabitEthernet 4/0",
                      "Loopback 0"
-                     ],
-                "port": 5001,
                      
-                    
+                    ],
+                "port": 5001,
                 "Neighbors": [
                     {"RouterID": 1, "Interface": "GigabitEthernet 1/0"},
-                    {"RouterID": 3, "Interface": "GigabitEthernet 2/0"},
-                    {"RouterID": 9, "Interface": "GigabitEthernet 3/0"},
-                    {"RouterID": 10, "Interface": "GigabitEthernet 4/0"}
+                    {"RouterID": 3, "Interface": "GigabitEthernet 2/0"}
                 ]
             },
             {
                 "RouterID": 3,
-                "BorderRouter":true,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
-                     "Loopback 0"
-                     ],
+                     "Loopback 0"                   
+                    ],
                 "port": 5002,
-                    
                 "Neighbors": [
                     {"RouterID": 2, "Interface": "GigabitEthernet 2/0"},
-                    {"RouterID": 4, "Interface": "GigabitEthernet 1/0"},
-                    {"RouterID": 9, "Interface": "GigabitEthernet 3/0"}
-                ]
-            }
-             {
-                "RouterID": 7,
-                "BorderRouter":false,
-                "Interfaces": [
-                     "GigabitEthernet 1/0",
-                     "GigabitEthernet 2/0",
-                     "Loopback 0" 
-                     ],
-                "port": 5006,
-                    
-                "Neighbors": [
-                    {"RouterID": 1, "Interface": "GigabitEthernet 2/0"},
-                    {"RouterID": 8, "Interface": "GigabitEthernet 1/0"}
-                ]
-            }
-             {
-                "RouterID": 8,
-                "BorderRouter":false,
-                "Interfaces": [
-                     "GigabitEthernet 1/0",
-                     "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0",
-                     "Loopback 0"  
-                     ],
-                "port": 5007,
-                    
-                "Neighbors": [
-                    {"RouterID": 1, "Interface": "GigabitEthernet 3/0"},
-                    {"RouterID": 7, "Interface": "GigabitEthernet 1/0"},
-                    {"RouterID": 9, "Interface": "GigabitEthernet 2/0"}
-                ]
-            }
-             {
-                "RouterID": 9,
-                "BorderRouter":false,
-                "Interfaces": [
-                     "GigabitEthernet 1/0",
-                     "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0",
-                     "GigabitEthernet 4/0",
-                     "Loopback 0" 
-                     ],
-                "port": 5008,
-                    
-                "Neighbors": [
-                    {"RouterID": 2, "Interface": "GigabitEthernet 3/0"},
-                    {"RouterID": 3, "Interface": "GigabitEthernet 4/0"},
-                    {"RouterID": 8, "Interface": "GigabitEthernet 2/0"},
-                    {"RouterID": 10, "Interface": "GigabitEthernet 1/0"}
-                ]
-            }
-             {
-                "RouterID": 10,
-                "BorderRouter":true,
-                "Interfaces": [
-                     "GigabitEthernet 1/0",
-                     "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0",
-                     "Loopback 0"
-                     ],
-                "port": 5009,
-                    
-                "Neighbors": [
-                    {"RouterID": 2, "Interface": "GigabitEthernet 3/0"},
-                    {"RouterID": 9, "Interface": "GigabitEthernet 1/0"},
-                    {"RouterID": 11, "Interface": "GigabitEthernet 2/0"}
+                    {"RouterID": 4, "Interface": "GigabitEthernet 1/0"}
                 ]
             }
         ]
       },
       {
-        "ASNumber": 65002,
-        "IGP": "OSPF",
-        "IPRange": "2000:2000:2000:2001::/112",
-        "as_provider": [65001],
-        "as_customer": [],
-        "as_peer": [],
+        "ASNumber": 22,
+        "IGP": "RIP",
+        "IPRange": "2000:2000:2001::/64",
+        "loopbackRange": "2000:2000:2000:2000:2001::/128",
+        "as_provider": 65001,
+        "as_customer": [65004],
+        "as_peer": [0],
         "Routers": [
             {
                 "RouterID": 4,
-                "BorderRouter":true,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "Loopback 0"
-                     ],
-                "port": 5003,
-                    
+                    ],
                 "Neighbors": [
                     {"RouterID": 3, "Interface": "GigabitEthernet 1/0"},
-                    {"RouterID": 5, "Interface": "GigabitEthernet 2/0"},
-                    {"RouterID": 12, "Interface": "GigabitEthernet 3/0"}
+                    {"RouterID": 5, "Interface": "GigabitEthernet 2/0"}
                 ]
             },
             {
                 "RouterID": 5,
-                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "Loopback 0"
-                     ],
-                "port": 5004,
-                    
+                    ],
                 "Neighbors": [
                     {"RouterID": 4, "Interface": "GigabitEthernet 2/0"},
-                    {"RouterID": 6, "Interface": "GigabitEthernet 1/0"},
-                    {"RouterID": 11, "Interface": "GigabitEthernet 4/0"},
-                    {"RouterID": 12, "Interface": "GigabitEthernet 3/0"}
+                    {"RouterID": 6, "Interface": "GigabitEthernet 1/0"}
                 ]
             },
             {
                 "RouterID": 6,
-                "BorderRouter":false,
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "Loopback 0"
-                    ], 
-                "port": 5005,
-                    
+                    ],
                 "Neighbors": [
-                    {"RouterID": 5, "Interface": "GigabitEthernet 1/0"},
-                    {"RouterID": 14, "Interface": "GigabitEthernet 2/0"},
-                    {"RouterID": 13, "Interface": "GigabitEthernet 3/0"} 
-                ]
-            }
-             {
-                "RouterID": 11,
-                "BorderRouter":true,
-                "Interfaces": [
-                     "GigabitEthernet 1/0",
-                     "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0",
-                     "Loopback 0"  
-                     ],
-                "port": 5010,
-                    
-                "Neighbors": [
-                    {"RouterID": 10, "Interface": "GigabitEthernet 2/0"},
-                    {"RouterID": 5, "Interface": "GigabitEthernet 3/0"},
-                    {"RouterID": 12, "Interface": "GigabitEthernet 1/0"}
-                ]
-            }
-             {
-                "RouterID": 12,
-                "BorderRouter":false,
-                "Interfaces": [
-                     "GigabitEthernet 1/0",
-                     "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0",
-                     "GigabitEthernet 4/0",
-                     "Loopback 0"  
-                     ],
-                "port": 5011,
-                    
-                "Neighbors": [
-                    {"RouterID": 11, "Interface": "GigabitEthernet 1/0"},
-                    {"RouterID": 4, "Interface": "GigabitEthernet 4/0"},
-                    {"RouterID": 5, "Interface": "GigabitEthernet 3/0"},
-                    {"RouterID": 13, "Interface": "GigabitEthernet 2/0"}
-                ]
-            }
-             {
-                "RouterID": 13,
-                "BorderRouter":false,
-                "Interfaces": [
-                     "GigabitEthernet 1/0",
-                     "GigabitEthernet 2/0",
-                     "GigabitEthernet 3/0",
-                     "Loopback 0" 
-                     ],
-                "port": 5012,
-                    
-                "Neighbors": [
-                    {"RouterID": 6, "Interface": "GigabitEthernet 3/0"},
-                    {"RouterID": 12, "Interface": "GigabitEthernet 2/0"}
-                    {"RouterID": 14, "Interface": "GigabitEthernet 1/0"} 
-                ]
-            }
-             {
-                "RouterID": 14,
-                "BorderRouter":false,
-                "Interfaces": [
-                     "GigabitEthernet 1/0",
-                     "GigabitEthernet 2/0",
-                     "Loopback 0" 
-                     ],
-                "port": 5013,
-                    
-                "Neighbors": [
-                    {"RouterID": 6, "Interface": "GigabitEthernet 2/0"},
-                    {"RouterID": 13, "Interface": "GigabitEthernet 1/0"}
+                    {"RouterID": 5, "Interface": "GigabitEthernet 1/0"}
                 ]
             }
         ]

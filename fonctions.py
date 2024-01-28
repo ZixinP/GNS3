@@ -48,4 +48,16 @@ def ipv6_config(output_file,interface, router_id, as_number,interface_ip):
         output_file.write(f"R{router_id}# end \n")
                 
                     
-            
+def add_ipv6_config(as_number,router_id,inter_name,add_ipv6,dict_output_file,dict_data):
+    for output_file_key in dict_output_file.keys():
+        if router_id == output_file_key:
+            ipv6_config(dict_output_file[output_file_key],inter_name, router_id, as_number,add_ipv6)  
+            for router in dict_data[as_number].router:
+                if router.router_id==router_id:
+                    for interface in router.interfaces_physiques:
+                        if interface.name==inter_name:
+                            interface.ipv6_address=add_ipv6
+                            break  
+    
+    
+    

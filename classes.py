@@ -50,12 +50,11 @@ class AS():
                                     if link[2]==neighbor[0]:
                                           FLAG=False
                                           
-                             
                              # si le lien existe déjà dans la liste mais dans l'autre sens
                              if link[0]==neighbor[0] :
                                     if link[2]==router.router_id:
                                           FLAG=False
-                                          if link[3]==None:        # si l'interface de voisin n'est pas encore configurée
+                                          if link[3]==None:        # si l'interface de voisin n'est pas encore declarée
                                                 link[3]=neighbor[1]
                         
                         # si le lien n'existe pas dans la liste, on l'ajoute 

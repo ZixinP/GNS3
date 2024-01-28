@@ -27,9 +27,7 @@ def ospf_cost_commands(output_file,interface, router_id, as_number,metric_value)
         file.write(f"R{router_id}# interface {interface} \n")
         file.write(f"R{router_id}# ipv6 ospf 1 area {as_number}\n")
         file.write(f"R{router_id}# cost {metric_value}\n")
-        file.write(f"R{router_id}# end \n")
-         
-        
+        file.write(f"R{router_id}# end \n")        
         
 def rip_config(output_file,interface, router_id, as_number):
    with open(output_file, 'a') as file:
@@ -50,9 +48,8 @@ def ibgp_config(output_file,as_number,router_id,interface, neighbor_router_ip):
         file.write(f"R{router_id}# neighbor {neighbor_router_ip} remote-as {as_number}\n")
         file.write(f"R{router_id}# address-family ipv6 unicast\n")
         file.write(f"R{router_id}# neighbor {neighbor_router_ip} activate\n")
-        file.write(f"R{router_id}# neighbor {neighbor_router_ip} send-community\n")  # pour propager community vers tous les routeurs de meme AS 
+        file.write(f"R{router_id}# neighbor {neighbor_router_ip} send-community\n")
         file.write(f"R{router_id}# end \n")
-    
 
 def ebgp_config(outputfile,as_number, router_id,neighbor_as_number,neighbor_router_ip):
     with open(outputfile, 'a') as file:
@@ -70,6 +67,6 @@ def ebgp_network(outputfile,as_number, router_id,AS):
         file.write(f"R{router_id}# configure terminal \n")
         file.write(f"R{router_id}# router bgp {as_number} \n")
         file.write(f"R{router_id}# address-family ipv6 unicast \n")
-        for subnet in AS.subnets:
+        for subnet in AS.subnets.values():
             file.write(f"R{router_id}# network {subnet} \n")
         file.write(f"R{router_id}# end \n")
