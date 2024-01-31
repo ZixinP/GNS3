@@ -19,7 +19,8 @@
                     ],
                 "port": 5000,
                 "Neighbors": [
-                    {"RouterID": 2, "Interface": "Fastethernet 0/0"}  
+                    {"RouterID": 2, "Interface": "Fastethernet 0/0"},
+                    {"RouterID": 3, "Interface": "GigabitEthernet 1/0"} 
                 ]
             },
             {
