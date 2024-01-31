@@ -6,8 +6,8 @@
         "IPRange": "2001:100:100::/64",
         "loopbackRange": "2000:2000:2000:2000::/64",
         "as_provider": 0,
-        "as_customer": [65002],
-        "as_peer":[65003],
+        "as_customer": [22],
+        "as_peer":[33],
         "Routers": [
             {
                 "RouterID": 1,
@@ -131,8 +131,8 @@
         "IGP": "OSPF",
         "IPRange": "2000:2000:2001::/64",
         "loopbackRange": "2000:2000:2000:2000:2001::/128",
-        "as_provider": 65001,
-        "as_customer": [65004],
+        "as_provider": 11,
+        "as_customer": [44],
         "as_peer": [0],
         "Routers": [
             {
