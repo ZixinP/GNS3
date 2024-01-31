@@ -3,8 +3,8 @@
       {
         "ASNumber": 11,
         "IGP": "RIP",
-        "IPRange": "2000:2000:2000:::/64",
-        "loopbackRange": "2000:2000:2000:2000:2000::/128",
+        "IPRange": "2001:100:100::/64",
+        "loopbackRange": "2000:2000:2000:2000::/64",
         "as_provider": 0,
         "as_customer": [65002],
         "as_peer":[65003],
