@@ -1,21 +1,26 @@
-import json
 import protocols as p
-import classes as c
 import fonctions as f
 import config_bgp as bgp
 import config_ipv6 as ipv6
+import bgp_police as police
+import write as w
 
 dict_data = {}  # dictionnaire pour stocker tous les objets créés
-dict_output_file = {}  # dictionnaire pour stocker les fichiers de consignes de configuration des routeurs différents
+dict_output_file = {}  # dictionnaire pour stocker les fichier de sortie 
+dict_config_dict = {}  #  dictionnaire pour stocker les dictionnaires de configuration de chaque routeur
 
 def main(intent_file):
-    
-    network_intents = f.open_file(intent_file)    # charger le fichier JSON et récupérer la liste des intents
-    ipv6.initialisation(network_intents, dict_data, dict_output_file)    # Initialiser les objets AS, router, interface et les ajouter aux dictionnaires dict_data
-    ipv6.generate_cisco_config_physique(dict_data, dict_output_file)    # créer les objets et générer les consignes de configuration IPv6
-    ipv6.generate_cisco_config_loopback(network_intents, dict_data, dict_output_file)    # créer les objets et générer les consignes de configuration IPv6   
-    bgp.etablir_ibgp(dict_data, dict_output_file)    # créer les objets et générer les consignes de configuration iBGP
-    bgp.etablir_ebgp(dict_data, dict_output_file)    # créer les objets et générer les consignes de configuration eBGP
+    network_intents = f.open_file(intent_file)    
+    ipv6.initialisation(network_intents, dict_data, dict_output_file,dict_config_dict)    
+    ipv6.generate_cisco_config_physique(dict_data,dict_config_dict)  
+    ipv6.generate_cisco_config_loopback(network_intents, dict_data, dict_config_dict)    
+    p.bgp_init(dict_config_dict,dict_data)
+    bgp.etablir_ibgp(dict_data, dict_config_dict)    
+    bgp.etablir_ebgp(dict_data, dict_config_dict)
+    p.network(dict_config_dict,dict_data)   
+    police.Community_local_pref(dict_data, dict_config_dict) 
+    f.igp_code(dict_data, dict_config_dict)
+    w.write_in_config(dict_output_file,dict_config_dict)    
     
     print(dict_output_file)
     return dict_output_file

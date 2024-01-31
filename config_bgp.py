@@ -1,33 +1,22 @@
 
 import protocols as p
-import json
 
 
-def etablir_ibgp(dict_data, dict_output_file):
-    for AS in dict_data.keys():
-        for self_router in dict_data[AS].router:
-           
+def etablir_ibgp(dict_data, dict_config_dict):
+    for AS in dict_data.values():
+        for self_router in AS.router:
+               dict = dict_config_dict[self_router.router_id]
                # etablir la session ibgp entre les routeurs d'un AS
-               for other_router in dict_data[AS].router:
+               for other_router in AS.router:
                    if other_router.router_id != self_router.router_id:
                        for other_interface in other_router.interface_loopback:
                            other_router_loopback=other_interface.loopback_address.split("/")[0]
-                           for output_file_key in dict_output_file.keys():
-                               if self_router.router_id == output_file_key:
-                                   
-                                   # ajouter les consignes sur la connexion ibgp dans le fichier
-                                   with open(dict_output_file[output_file_key], 'a') as file:
-                                       p.ibgp_config(dict_output_file[output_file_key],dict_data[AS].as_number,self_router.router_id,self_router.interface_loopback[0].name,other_router_loopback)
+                           p.ibgp_config(dict, AS.as_number, other_router_loopback)
                                        
-    '''
-    Essai d'utiliser le dict pour stocker les liens ibgp
-    au lieu de iterer sur les routeurs et les interfaces
-    celui-ci peut ameliorer la performance
-    '''
 
 
 
-def etablir_ebgp(dict_data, dict_output_file):
+def etablir_ebgp(dict_data, dict_config_dict):
     ebgp_links=[]    # [router_as,router_id,router_interface,router_inter_add,neighbor_as,neighbor_id,neighbor_interface,neighbor_inter_add]
     for AS in dict_data.keys():
         as_number=dict_data[AS].as_number
@@ -67,26 +56,37 @@ def etablir_ebgp(dict_data, dict_output_file):
     
     # configurer les liens ebgp                
     for link_complet in ebgp_links:
+        print(link_complet)
         as_number=link_complet[0]
         router_id=link_complet[1]
         router_interface=link_complet[2]
+        router_inter_add=link_complet[3]
         neighbor_as=link_complet[4]
         neighbor_id=link_complet[5]
-        # neighbor_interface=link_complet[6]
+        neighbor_interface=link_complet[6]
         neighbor_inter_add=link_complet[7]
-        for output_file_key in dict_output_file.keys():
-            if router_id == output_file_key:
-                with open(dict_output_file[output_file_key], 'a') as file:
-                    # ajouter les consignes sur la connexion ebgp dans le fichier
-                    p.ebgp_config(dict_output_file[output_file_key],as_number, router_id,neighbor_as,neighbor_inter_add)
-                    # ajouter les informations de voisin dans les attributs d'interface
-                    for interface in dict_data[AS].router[0].interfaces_physiques:
-                        if interface.name==router_interface:
-                            interface.neighbor_as=neighbor_as
-                            interface.neighbor_id=neighbor_id
-                            interface.neighbor_address=neighbor_inter_add
-                            break
-                    
-                    p.ebgp_network(dict_output_file[output_file_key],as_number, router_id,dict_data[AS]) 
+        
+        self_dict = dict_config_dict[router_id]
+        nei_dict = dict_config_dict[neighbor_id]
+        p.ebgp_config(self_dict,neighbor_as,neighbor_inter_add)
+        p.ebgp_config(nei_dict,as_number,router_inter_add)
+        
+        # ajouter les informations de voisin dans les attributs d'interface
+        for router in dict_data[as_number].router:
+            if router.router_id==router_id:
+                for interface in router.interfaces_physiques:
+                    if interface.name == router_interface:
+                        interface.neighbor_as = neighbor_as
+                        interface.neighbor_id = neighbor_id
+                        interface.neighbor_address = neighbor_inter_add
+                        break
+        for router in dict_data[neighbor_as].router:
+            if router.router_id==neighbor_id:
+                for interface in router.interfaces_physiques:
+                    if interface.name == neighbor_interface:
+                        interface.neighbor_as = as_number
+                        interface.neighbor_id = router_id
+                        interface.neighbor_address = router_inter_add
+                        break
     print(ebgp_links)
     

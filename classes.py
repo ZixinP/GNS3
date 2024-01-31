@@ -29,13 +29,16 @@ class AS():
          self.as_number = as_number
          self.igp_protocol = igp_protocol
          self.router = []
-         self.links = []     # [router_id,router_interface,neighbor_id,neighbor_interface]
+         self.links = []      # [router_id,router_interface,neighbor_id,neighbor_interface]
          self.iprange_reseau = ip_range_reseau
          self.iprange_prefix = ip_range_prefix
          self.subnets={}
          self.provider={}
          self.customers={}
          self.peers={}
+         self.provider_com = 30
+         self.peer_com = 20
+         self.customer_com = 10
       
       def linkscollect(self):     # collecter les liens entre les routeurs de l'AS
             liste_links = []
@@ -44,14 +47,13 @@ class AS():
                         FLAG=True
                         
                         for link in liste_links:
-                          
                              # si le lien existe déjà dans la liste
                              if link[0]==router.router_id :                   
                                     if link[2]==neighbor[0]:
                                           FLAG=False
                                           
                              # si le lien existe déjà dans la liste mais dans l'autre sens
-                             if link[0]==neighbor[0] :
+                             elif link[0]==neighbor[0] :
                                     if link[2]==router.router_id:
                                           FLAG=False
                                           if link[3]==None:        # si l'interface de voisin n'est pas encore declarée
@@ -60,12 +62,6 @@ class AS():
                         # si le lien n'existe pas dans la liste, on l'ajoute 
                         if FLAG:
                               liste_links.append([router.router_id,neighbor[1],neighbor[0],None])
-                              router.ASBR=True
-                              
-                              # ajouter l'interface de voisin dans l'objet interface
-                              for interface in router.interfaces_physiques:
-                                    if interface.name == neighbor[1]:
-                                          interface.neighbor_id = neighbor[0]
                                     
                               
             self.links=liste_links
