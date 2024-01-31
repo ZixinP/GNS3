@@ -5,46 +5,46 @@
 	},
 	"routers":[
 	{
-		"name":"i1","protocole":"RIP","AS":"7","BorderRouter":false
+		"name":"i1","protocole":"RIP","AS":"1","BorderRouter":false
 	},
 	{
-		"name":"i2","protocole":"RIP","AS":"7","BorderRouter":false
+		"name":"i2","protocole":"RIP","AS":"1","BorderRouter":false
 	},
 	{
-		"name":"i3","protocole":"RIP","AS":"7","BorderRouter":false
+		"name":"i3","protocole":"RIP","AS":"1","BorderRouter":false
 	},
 	{
-		"name":"i4","protocole":"RIP","AS":"7","BorderRouter":false
+		"name":"i4","protocole":"RIP","AS":"1","BorderRouter":false
 	},
 	{
-		"name":"i5","protocole":"RIP","AS":"7","BorderRouter":false
+		"name":"i5","protocole":"RIP","AS":"1","BorderRouter":false
 	},
 	{
-		"name":"i6","protocole":"RIP","AS":"7","BorderRouter":true
+		"name":"i6","protocole":"RIP","AS":"1","BorderRouter":true
 	},
 	{
-		"name":"i7","protocole":"RIP","AS":"7", "BorderRouter":true
+		"name":"i7","protocole":"RIP","AS":"1", "BorderRouter":true
 	},
 	{
-		"name":"i8","protocole":"OSPF","AS":"14","BorderRouter":false
+		"name":"i8","protocole":"OSPF","AS":"2","BorderRouter":false
 	},
 	{
-		"name":"i9","protocole":"OSPF","AS":"14","BorderRouter":false
+		"name":"i9","protocole":"OSPF","AS":"2","BorderRouter":false
 	},
 	{
-		"name":"i10","protocole":"OSPF","AS":"14","BorderRouter":false
+		"name":"i10","protocole":"OSPF","AS":"2","BorderRouter":false
 	},
 	{
-		"name":"i11","protocole":"OSPF","AS":"14","BorderRouter":true
+		"name":"i11","protocole":"OSPF","AS":"2","BorderRouter":true
 	},
 	{
-		"name":"i12","protocole":"OSPF","AS":"14","BorderRouter":false
+		"name":"i12","protocole":"OSPF","AS":"2","BorderRouter":false
 	},
 	{
-		"name":"i13","protocole":"OSPF","AS":"14","BorderRouter":false
+		"name":"i13","protocole":"OSPF","AS":"2","BorderRouter":false
 	},
 	{
-		"name":"i14","protocole":"OSPF","AS":"14","BorderRouter":true
+		"name":"i14","protocole":"OSPF","AS":"2","BorderRouter":true
 	}
 	],
 	"links":[

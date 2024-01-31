@@ -454,7 +454,7 @@ for router in data ["routers"]:
 		f.write("end\n")
 		
 		# 移动配置文件到指定目录 déplacer le fichier
-		dossier="C:/Users/Utilisateur/Desktop/GNS" # GNS3项目目录 répertoire de projet GNS3 
+		dossier="C:/Users/Utilisateur/Desktop/GNS2" # GNS3项目目录 répertoire de projet GNS3 
 		liste_dossiers=os.listdir(dossier)
 		#time.sleep(5)
 		for nom_dossier in liste_dossiers:
