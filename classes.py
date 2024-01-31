@@ -25,13 +25,13 @@ class interface():
          
          
 class AS():
-      def __init__(self,as_number, igp_protocol, ip_range,ip_mask):
+      def __init__(self,as_number, igp_protocol, ip_range_reseau,ip_range_prefix):
          self.as_number = as_number
          self.igp_protocol = igp_protocol
          self.router = []
          self.links = []     # [router_id,router_interface,neighbor_id,neighbor_interface]
-         self.iprange = ip_range
-         self.ipmask = ip_mask
+         self.iprange_reseau = ip_range_reseau
+         self.iprange_prefix = ip_range_prefix
          self.subnets={}
          self.provider={}
          self.customers={}

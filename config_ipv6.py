@@ -21,11 +21,11 @@ def initialisation(network_intents, dict_data, dict_output_file):
             
             ip_range_reseau = ip_range.split("/")[0]
             print(ip_range_reseau)
-            ip_range_mask = ip_range.split("/")[1]    
-            print(ip_range_mask)
+            ip_range_prefix = ip_range.split("/")[1]    
+            print(ip_range_prefix)
             
             as_name=f"AS{as_number}"
-            as_name = c.AS(as_number, igp_protocol, ip_range,ip_range_mask)
+            as_name = c.AS(as_number, igp_protocol, ip_range_reseau,ip_range_prefix)   # créer un objet AS
             
             if provider != None:
                 as_name.provider[provider]=f"{as_number}:{provider}"
@@ -81,7 +81,7 @@ def generate_cisco_config_physique(dict_data, dict_output_file):
     for AS in dict_data.values():  
         AS.linkscollect()    # collecter les liens entre les routeurs de l'AS 
         print(AS.links)
-        dict_subnet=f.subnet_calculate(AS.iprange,AS.ipmask,len(AS.links))   
+        dict_subnet=f.subnet_calculate(AS.iprange_reseau,AS.iprange_prefix,len(AS.links))   # diviser le préfixe en sous-réseaux  
         print(dict_subnet)
         AS.subnets=dict_subnet   # ajouter les sous-réseaux au dictionnaire dict_subnet
             
@@ -99,8 +99,8 @@ def generate_cisco_config_physique(dict_data, dict_output_file):
             '''
             self_add = link_ip.split("/")[0]+"1"+"/"+link_ip.split("/")[1]     # configurer l'adresse IP de l'interface de routeur
             print(self_add)
-            if neighbor_interface == None:    # si le voisin est un routeur dans un autre AS                
-                f.add_ipv6_config(AS.as_number,router_id,self_interface,self_add,dict_output_file,dict_data)                                 
+            f.add_ipv6_config(AS.as_number,router_id,self_interface,self_add,dict_output_file,dict_data)   
+            if neighbor_interface == None:    # si le voisin est un routeur dans un autre AS                                        
                 if AS.igp_protocol == "OSPF":
                     p.ospf_mode_passive(dict_output_file[router_id],self_interface, router_id, AS.as_number)   # configurer OSPF en mode passif sur l'interface physique
                                     
@@ -137,7 +137,7 @@ def generate_cisco_config_loopback(network_intent, dict_data, dict_output_file):
                 i+=1
                 for output_file_key in dict_output_file.keys():
                     if router_id == output_file_key:
-                        f.ipv6_config(dict_output_file[output_file_key],interface.name, router_id, as_number,interface.loopback_address)   # configurer l'adresse loopback sur les interfaces loopback 
+                        f.ipv6_config(dict_output_file[output_file_key],interface.name, router_id,interface.loopback_address)   # configurer l'adresse loopback sur les interfaces loopback 
                 
             
                            
