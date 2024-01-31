@@ -14,7 +14,7 @@
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "FastEthernet 0/0",
-                     "Loopback 0"
+                     "Loopback0"
                                                          
                     ],
                 "port": 5000,
@@ -29,7 +29,7 @@
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "FastEthernet 0/0",
-                     "Loopback 0"
+                     "Loopback0"
                      
                     ],
                 "port": 5001,
@@ -45,7 +45,7 @@
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "FastEthernet 0/0",
-                     "Loopback 0"                   
+                     "Loopback0"                   
                     ],
                 "port": 5002,
                 "Neighbors": [
@@ -61,7 +61,7 @@
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "FastEthernet 0/0",
-                     "Loopback 0"                   
+                     "Loopback0"                   
                     ],
                 "port": 5003,
                 "Neighbors": [
@@ -79,7 +79,7 @@
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "FastEthernet 0/0",
-                     "Loopback 0"                   
+                     "Loopback0"                   
                     ],
                 "port": 5004,
                 "Neighbors": [
@@ -96,7 +96,7 @@
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "FastEthernet 0/0",
-                     "Loopback 0"                   
+                     "Loopback0"                   
                     ],
                 "port": 5005,
                 "Neighbors": [
@@ -112,7 +112,7 @@
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "FastEthernet 0/0",
-                     "Loopback 0"                   
+                     "Loopback0"                   
                     ],
                 "port": 5006,
                 "Neighbors": [
@@ -141,7 +141,7 @@
                      "GigabitEthernet 1/0",
                      "FastEthernet 0/0",
                      "GigabitEthernet 3/0",
-                     "Loopback 0"
+                     "Loopback0"
                     ],
                  "port": 5013,
                 "Neighbors": [
@@ -156,7 +156,7 @@
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                       "FastEthernet 0/0",
-                     "Loopback 0"
+                     "Loopback0"
                     ],
                  "port": 5010,
                 "Neighbors": [
@@ -172,7 +172,7 @@
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "FastEthernet 0/0",
-                     "Loopback 0"
+                     "Loopback0"
                     ],
                  "port": 5009,
                 "Neighbors": [
@@ -190,7 +190,7 @@
                      "GigabitEthernet 2/0",
                      "GigabitEthernet 3/0",
                      "FastEthernet 0/0",
-                     "Loopback 0"
+                     "Loopback0"
                     ],
                  "port": 5011,
                 "Neighbors": [
@@ -207,7 +207,7 @@
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "FastEthernet 0/0",
-                     "Loopback 0"
+                     "Loopback0"
                     ],
                  "port": 5008,
                 "Neighbors": [
@@ -223,7 +223,7 @@
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
                      "FastEthernet 0/0",
-                     "Loopback 0"
+                     "Loopback0"
                     ],
                  "port": 5012,
                 "Neighbors": [
@@ -238,7 +238,7 @@
                 "Interfaces": [
                      "GigabitEthernet 1/0",
                      "GigabitEthernet 2/0",
-                     "Loopback 0"
+                     "Loopback0"
                     ],
                  "port": 5007,
                 "Neighbors": [
