@@ -1,4 +1,4 @@
-# PROJET GNS3
+# *PROJET GNS3*
 ## During this project, we ought to implement a software which can generate the GNS3 configurations for each router in its output_file.cfg, by providing a json file as input.
 ## The json file is required to have the basic information about the topology of the network，of which the structure is shown in intent.json in the folder projet_GNS3_code
 ## First part:
